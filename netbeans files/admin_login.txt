@@ -1,0 +1,27 @@
+  Database db =new Database();
+        out.println(db.connectdb());
+        
+        if(btn.equals("Login"))
+         {
+             try
+             {
+               if(username.toString().equals("Admin")&& upass.toString().equals("Password"))
+        {
+        out.println("Login Success");
+        resp.sendRedirect("admin_Add_Dr_cate.jsp");
+        }
+        else
+        {
+         out.println("Login Faild");
+         resp.setContentType("text/html;charset=UTF-8");
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('login failed');");
+        out.println("location='admin_login.jsp';");
+        out.println("</script>");
+        }  
+             }catch(Exception ex)
+             {
+                 out.println(ex.toString());
+             }
+         
+         }

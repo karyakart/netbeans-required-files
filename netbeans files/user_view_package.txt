@@ -1,0 +1,141 @@
+    <%-- 
+    Document   : user_view_package
+    Created on : 30 May, 2022, 6:18:31 AM
+    Author     : pc
+--%>
+
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <style>
+           .container
+           {
+               margin-left: 220px;
+              padding: 10px;
+               margin-top:20px;
+           }
+           
+            .div1
+            {
+      
+                margin-left: -20px;
+                margin-top: 50px;
+                margin-right:0px;
+                background-color: white;
+                border: 1px solid black;
+                width: 80%;
+            }
+            
+        </style>
+    </head>
+    <body style="background-color: white">
+         <div class="container">
+        <%
+        Connection cn=null;
+        
+       Statement st=null;
+         try
+        {
+        Class.forName("com.mysql.jdbc.Driver");
+        cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/destination_wedding","root","root");
+   st=cn.createStatement();
+        String sql="select * from add_package where dname='"+request.getParameter("dname")+"'";
+        ResultSet rs=st.executeQuery(sql);
+        while(rs.next())
+                       {
+            String dname=rs.getString("dname");
+            String city=rs.getString("dcity");
+            String pname=rs.getString("pname");
+            String pprice=rs.getString("pprice");
+             String pimg=rs.getString("pimg");
+            String pdesc=rs.getString("pdesc");
+            String pservices=rs.getString("pservices");
+                 
+  %>
+  
+  
+           <div class="div1">
+               <form action="booking.jsp" method="post">
+                   <br>
+                   <center>    <img src="<%=pimg%>" height="380" width="420"></center>
+              <input type="hidden" name="cimg" value="<%=pimg%>">
+              <br><br>
+              
+              <div class="row">
+                  <div class="col-sm-2"></div>
+                  <div class="col-sm-5">
+                     <label>Destination Name:-</label>
+                      <label><%=dname%></label>
+                      <input type="hidden" name="dname" value="<%=dname%>"> 
+                      
+                  </div>
+                   <div class="col-sm-5">
+                     <label>Package Name:-</label>
+                      <label><%=pname%></label>
+                      <input type="hidden" name="pname" value="<%=pname%>">
+                      
+                  </div>
+              </div><br>
+<div class="row">
+                  <div class="col-sm-2"></div>
+                  <div class="col-sm-5">
+                       <label>City:--</label>
+                      <label><%=city%></label>
+                      <input type="hidden" name="city" value="<%=city%>">
+                      
+                  </div>
+                   <div class="col-sm-5">
+                     <label>Price:-</label>
+                      <label><%=pprice%></label>
+                      <input type="hidden" name="price" value="<%=pprice%>">
+                      
+                  </div>
+              </div>
+                 
+                      <br>
+               <div class="row">
+                  <div class="col-sm-2"></div>
+                  <div class="col-sm-5">
+                          <label>Description--</label>
+                      <label><%=pdesc%></label>
+                      <input type="hidden" name="des" value="<%=pdesc%>">
+                      
+                  </div>
+                   <div class="col-sm-5">
+                     <label>Services-</label>
+                      <label><%=pservices%></label>
+                      <input type="hidden" name="ser" value="<%=pservices%>">
+                      
+                  </div>
+              </div>
+                
+             <br>
+                 &nbsp;&nbsp;&nbsp;
+                 <center>      <input type="submit" name="btn_submit" value="Book Package" class="btn btn-primary"></center>
+                      <br><br>
+               </form>
+      </div>
+                
+     
+        
+        <%   
+        }
+        
+        }catch(Exception ex)
+        {
+           out.println(ex.toString());
+        }
+
+
+%>
+</div>
+    </body>
+</html>

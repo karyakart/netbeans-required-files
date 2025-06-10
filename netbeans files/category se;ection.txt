@@ -1,0 +1,1 @@
+String sql="select * from add_doctor where specialization='"+request.getParameter("cname")+"'";

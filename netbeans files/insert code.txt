@@ -1,0 +1,26 @@
+ String Insert(String sql)
+    {
+        try
+        {
+    st=cn.createStatement();
+    st.executeUpdate(sql);           
+            
+    return("Records Inserted");
+        }catch(Exception ex)
+        {
+        return(ex.toString());
+        }
+    
+    }
+
+
+
+
+
+        if(event.equals("Register"))
+        {
+           String insert=db.Insert("insert into register(name, uemail, cno,uname,upass)values('"+fullname.toString()+"','"+email.toString()+"','"+phone.toString()+"','"+uname.toString()+"','"+upass.toString()+"')");
+     out.println(insert);
+     
+             
+        }

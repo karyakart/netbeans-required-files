@@ -1,0 +1,181 @@
+<%-- 
+    Document   : view_doctor
+    Created on : 29 Nov, 2024, 10:39:47 PM
+    Author     : saksh
+--%>
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@page import="java.sql.ResultSet"%>
+
+<%@page import="java.sql.DriverManager"%>
+
+<%@page import="java.sql.Statement"%>
+
+<%@page import="java.sql.Connection"%>
+
+
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>Jsp Page</title>
+
+        <link rel="stylesheet" href="bootstrap.css">
+
+        <style>
+            .container {
+                margin-left: 120px;
+                padding: 10px;
+                margin-top: 20px;
+                display: flex;
+                flex-wrap: wrap; 
+                gap: 20px;
+            }
+
+            .div1 {
+                background-color: white;
+                border: 1px solid black;
+                width: 28%; 
+                padding: 10px;
+                box-sizing: border-box; 
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            
+        </style>
+    </head>
+
+    <body style="background-color: white">
+
+         <div class="container">
+
+        <%
+
+        Connection cn=null;
+
+        
+
+       Statement st=null;
+
+         try
+
+        {
+
+        Class.forName("com.mysql.jdbc.Driver");
+
+        cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/doctors_portal","root","root");
+
+   st=cn.createStatement();
+
+        String sql="select * from add_doctor";
+
+        ResultSet rs=st.executeQuery(sql);
+
+        while(rs.next())
+
+                       {
+
+            String did=rs.getString("id");
+
+            String dname=rs.getString("dname");
+            String cimg=rs.getString("image");
+            String email=rs.getString("email");
+            String fees=rs.getString("visitfee");
+
+  
+
+                 
+
+  %>
+
+  
+
+  
+
+ <div class="div1">
+
+               <form action="book_appointment.jsp" method="post">
+
+                   <center> <img src="<%=cimg%>" height="280" width="315"></center>
+
+              <input type="hidden" name="cimg" value="<%=cimg%>">
+
+              <br><br>
+
+         
+
+                      
+
+                  <label>Category Name:</label>
+
+                      <label><%=dname%></label>
+
+                      <input type="hidden" name="cname" value="<%=dname%>">
+
+                      <br><br>
+
+                      
+                    
+                      <label>Description:</label>
+
+                      <label><%=email%></label>
+
+                      <input type="hidden" name="email" value="<%=email%>">
+
+                      <br><br>
+                      
+                       <label>Fees:</label>
+
+                      <label><%=fees%></label>
+
+                      <input type="hidden" name="fees" value="<%=fees%>">
+
+                      <br><br>
+
+                      
+
+                
+
+                 &nbsp;&nbsp;&nbsp;
+
+                      <input type="submit" name="btn_submit" value="Book Dorctor" class="btn btn-primary">
+
+                   <br><br>
+
+               </form>
+
+      </div>   
+
+        <%   
+
+        }
+
+        
+
+        }catch(Exception ex)
+
+        {
+
+           out.println(ex.toString());
+
+        }
+
+
+
+
+
+%>
+
+
+
+    </body>
+         </html>
+

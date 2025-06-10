@@ -1,0 +1,27 @@
+ if(event.equals("Search"))
+           {
+        Connection cn=null;
+        Statement st=null;
+  
+               try{
+               
+            Class.forName("com.mysql.jdbc.Driver");
+            cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/destination_wedding","root","root");
+   
+     st=cn.createStatement();
+                String sql="Select * from add_city where id='"+id.toString()+"'" ;  
+                ResultSet rs=st.executeQuery(sql);
+                while(rs.next())
+          {
+                                  
+               req.setAttribute("cname", rs.getString("cname"));
+               req.setAttribute("descr", rs.getString("descr"));
+               
+               
+               req.getRequestDispatcher("add_city.jsp").forward(req, resp);
+           }
+           }catch(Exception ex)
+           {
+               out.println(ex.toString());
+           }
+           }

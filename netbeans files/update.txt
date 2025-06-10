@@ -1,0 +1,26 @@
+
+
+
+	if(event.equals("Update"))
+        {
+           String update=db.Update("update register set name='"+fullname.toString()+"', cno='"+phone.toString()+"', uname='"+uname.toString()+"', upass='"+upass.toString()+"' where uemail='"+email.toString()+"'" );
+     out.println(update);
+      
+        }
+        
+
+ String Update(String sql)
+    {
+        try
+        {
+    st=cn.createStatement();
+    st.executeUpdate(sql);           
+            
+    return("Records Updated Successfully");
+        }catch(Exception ex)
+        {
+        return(ex.toString());
+        }
+    
+    } 
+  

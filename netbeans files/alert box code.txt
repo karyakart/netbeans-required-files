@@ -1,0 +1,5 @@
+resp.setContentType("text/html");
+              out.println("<script type=\"text/javascript\">");
+              out.println("alert('Document submited successfully');");
+              out.println("location='Document_of_guarantor.jsp';");
+              out.println("</script>");

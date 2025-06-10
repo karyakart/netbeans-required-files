@@ -1,0 +1,5 @@
+ value="<%=session.getAttribute("uname")%>" fetch value from registration page
+
+
+ value="<%=request.getParameter("cname")%>" fetch value from view page
+

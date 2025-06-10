@@ -1,0 +1,22 @@
+if(event.equals("Delete"))
+     {
+     String Delete=db.Delete ("delete from register where uemail='"+email.toString()+"'"); 
+     out.println(Delete);
+         
+         
+    }
+
+ String Delete(String sql)
+    {
+        try
+        {
+    st=cn.createStatement();
+    st.executeUpdate(sql);           
+            
+    return("Records Deleted Successfully");
+        }catch(Exception ex)
+        {
+        return(ex.toString());
+        }
+    
+    }

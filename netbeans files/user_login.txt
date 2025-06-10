@@ -1,0 +1,40 @@
+ HttpSession session=req.getSession();
+        Connection cn=null;
+        Statement st=null;
+          Database db =new Database();
+        out.println(db.ConnectDB());
+     
+         if(event.equals("Login"))
+         {
+             try
+             {
+               Class.forName("com.mysql.jdbc.Driver");
+            cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/doctors_portal","root","root");
+              st=cn.createStatement();
+              String sql="select * from u_registration where email='"+email.toString()+"'and upass='"+passwor.toString()+"'";
+              ResultSet rs=st.executeQuery(sql);
+              if(rs.next())
+              {
+                  
+                  session.setAttribute("uname",rs.getString("uname"));
+                  session.setAttribute("email",rs.getString("email"));
+                  session.setAttribute("cno",rs.getString("cno"));
+                  session.setAttribute("city",rs.getString("city"));
+                  resp.sendRedirect("view_doctor.jsp");
+              }
+              else
+              {
+                  out.println("Login Faild");
+                  resp.setContentType("text/html;charset=UTF-8");
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('login failed');");
+        out.println("location='patient_login.jsp';");
+        out.println("</script>");
+              }
+                 
+             }catch(Exception ex)
+             {
+                 out.println(ex.toString());
+             }
+         
+         }

@@ -1,0 +1,110 @@
+<%-- 
+    Document   : view
+    Created on : 29 Nov, 2024, 11:32:54 AM
+    Author     : ASMITA
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<center>
+    <h2>View Users</h2></center>
+
+<table>
+ <thead>
+      <tr>
+          <th>Sr.No</th>
+          <th>Name</th>
+       <th>Email</th>
+    <th>Gender</th>
+        <th>Contact</th>
+        <th>Address</th>
+       
+      </tr>
+    </thead>
+    
+     <tbody>
+       <%int id=1;
+  String event=request.getParameter("btninsert");
+  Connection cn=null;
+  Statement st=null;
+  
+         try{
+             Class.forName("com.mysql.jdbc.Driver");
+              cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/online_Grocery","root","root");
+   
+              st=cn.createStatement();
+   String sql="Select * from registration";
+   ResultSet rs=st.executeQuery(sql);
+                while(rs.next())
+                                       {   
+                    String uname=rs.getString("uname"); 
+                    String uemail=rs.getString("uemail");
+                    String ugender=rs.getString("ugender");
+                    String cno=rs.getString("cno"); 
+                    String uadd=rs.getString("uadd"); 
+                    
+                  
+                    
+                  
+                   
+                    
+                    
+               %>
+  
+                 
+                     <tr>
+   
+ <td><%=id++%></td>
+       <td><%=uname%>
+   
+    <td><%=uemail%></td>
+    <td><%=ugender%></td>
+    <td><%=cno%></td>
+    <td><%=uadd%></td>
+   
+    
+  </tr> 
+                
+     
+  <%                                
+                                       
+                }
+         }catch(Exception e)
+                                 {
+             out.println(e.toString());
+         }
+                 
+ 
+
+%>  
+    </tbody>
+</table>
+
+</body>
+</html>
